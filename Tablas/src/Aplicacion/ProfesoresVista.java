@@ -28,7 +28,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
 
-public class Vista extends JFrame {
+public class ProfesoresVista extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
@@ -45,7 +45,7 @@ public class Vista extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Vista frame = new Vista();
+					ProfesoresVista frame = new ProfesoresVista();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,7 +57,7 @@ public class Vista extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Vista() {
+	public ProfesoresVista() {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
