@@ -16,6 +16,8 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
@@ -77,7 +79,7 @@ public class Vista extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("Tablas.data"));
-					objectOutputStream.writeObject(table);
+					objectOutputStream.writeObject(table.getModel());
 					objectOutputStream.close();
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
@@ -95,7 +97,7 @@ public class Vista extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					ObjectInputStream ObjectInputStream = new ObjectInputStream(new FileInputStream("Tablas.data"));
-					Persona tabla = (Persona) ObjectInputStream.readObject();
+					table.setModel((TableModel) ObjectInputStream.readObject());
 					ObjectInputStream.close();
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
