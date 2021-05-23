@@ -29,7 +29,7 @@ import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
 
 public class ProfesoresVista extends JFrame {
-
+	private Lanzadera lanzadera;
 	private JPanel contentPane;
 	private JTable table;
 	ArrayList<Persona> lista = new ArrayList<Persona>();
@@ -37,6 +37,10 @@ public class ProfesoresVista extends JFrame {
 	private JTextField textApellido1;
 	private JTextField textApellido2;
 	private JTextField textEdad;
+	
+	public void setLanzadera(Lanzadera lanzadera) {
+		this.lanzadera = lanzadera;
+	}
 
 	/**
 	 * Launch the application.
@@ -78,7 +82,7 @@ public class ProfesoresVista extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("Tablas.data"));
+					ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("Tablas2.data"));
 					objectOutputStream.writeObject(table.getModel());
 					objectOutputStream.close();
 				} catch (FileNotFoundException e) {
@@ -96,7 +100,7 @@ public class ProfesoresVista extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					ObjectInputStream ObjectInputStream = new ObjectInputStream(new FileInputStream("Tablas.data"));
+					ObjectInputStream ObjectInputStream = new ObjectInputStream(new FileInputStream("Tablas2.data"));
 					table.setModel((TableModel) ObjectInputStream.readObject());
 					ObjectInputStream.close();
 				} catch (FileNotFoundException e) {
@@ -163,65 +167,78 @@ public class ProfesoresVista extends JFrame {
 
 			}
 		});
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				lanzadera.goBack();
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
-				.createSequentialGroup().addGap(19)
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
-						.createSequentialGroup()
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(lblNewLabel_1_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 75,
-										Short.MAX_VALUE)
-								.addComponent(lblNewLabel_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(lblNewLabel_1_1_1, GroupLayout.PREFERRED_SIZE, 75,
-										GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(textApellido2, GroupLayout.PREFERRED_SIZE, 217,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(textApellido1, GroupLayout.PREFERRED_SIZE, 217,
-										GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(textNombre, GroupLayout.PREFERRED_SIZE, 217,
-												GroupLayout.PREFERRED_SIZE)
-										.addGap(18).addComponent(btnAnadir, GroupLayout.PREFERRED_SIZE, 80,
-												GroupLayout.PREFERRED_SIZE))))
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(lblNewLabel_1_1_1_1, GroupLayout.PREFERRED_SIZE, 75,
-										GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(textEdad, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup().addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(table, GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+							.addGap(19)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(lblNewLabel_1_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+										.addComponent(lblNewLabel_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(lblNewLabel_1_1_1, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(textApellido2, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)
+										.addComponent(textApellido1, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addComponent(textNombre, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)
+											.addGap(18)
+											.addComponent(btnAnadir, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblNewLabel_1_1_1_1, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(textEdad, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(table, GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 										.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-										.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))))
-				.addContainerGap()));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup().addGap(26)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(lblNewLabel_1)
-								.addComponent(textNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnAnadir))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(lblNewLabel_1_1)
-								.addComponent(textApellido1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(lblNewLabel_1_1_1)
-								.addComponent(textApellido2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNewLabel_1_1_1_1).addComponent(textEdad, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGap(18)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup().addComponent(btnNewButton).addGap(18)
-										.addComponent(btnNewButton_1))
-								.addComponent(table, GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
-						.addContainerGap()));
+										.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)))))
+						.addComponent(btnBack))
+					.addContainerGap())
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(btnBack)
+					.addGap(3)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel_1)
+						.addComponent(textNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnAnadir))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel_1_1)
+						.addComponent(textApellido1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel_1_1_1)
+						.addComponent(textApellido2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel_1_1_1_1)
+						.addComponent(textEdad, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(btnNewButton)
+							.addGap(18)
+							.addComponent(btnNewButton_1))
+						.addComponent(table, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
+					.addContainerGap())
+		);
 		contentPane.setLayout(gl_contentPane);
 	}
 }
